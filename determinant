@@ -1,0 +1,40 @@
+def determinant(matrix):
+    if len(matrix) != len(matrix[0]):
+        return None
+    s = 0
+    for i in range(len(matrix) - 1):
+        if matrix[i][i] != 0:
+            pivot = matrix[i][i]
+        else:    
+            for j in range(i + 1,len(matrix)):
+                if matrix[j][i] != 0:
+                    pivot = matrix[j][i]
+                    matrix[i],matrix[j] = matrix[j],matrix[i]
+                    s = s + 1
+                    break
+            else:
+                return 0  
+        for j in range(i + 1,len(matrix)):
+            if matrix[j][i] != 0:
+                k = matrix[j][i] / pivot
+                #matrix[j][i] = 0
+                for z in range(i ,len(matrix)):
+                    matrix[j][z] = matrix[j][z] - k * matrix[i][z]
+    
+    det = 1
+    print(matrix)
+    for i in range(0, len(matrix)):
+        det = det * matrix[i][i]
+    #det = ((-1)**s)*det
+    #return matrix
+    return int(round(((-1) ** s) * det, 3))   
+
+
+             
+                 
+m5 = [[0,4,2],
+      [5,1,1],
+      [0,2,1],
+      [0,2,7]]
+
+print(determinant(m5))
